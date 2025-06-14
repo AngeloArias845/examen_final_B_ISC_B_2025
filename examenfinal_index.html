@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+    <body>
+        <h1> Anyelos Jordany Arias Lorenzo </h1>
+        <h2>
+AngeloArias845/Pokemon-ejercicios,
+AngeloArias845/PersonasDB,
+AngeloArias845/Calculadora-ejercicio,
+AngeloArias845/tareasemana5,
+AngeloArias845/parcial1isc2025,
+AngeloArias845/Tareasemana4,
+</h2>
+   
+
+</body>
+     <a href="https://github.com/AngeloArias845/" target="_blank">Mi perfil de GitHub</a>
+     <form id="miFormulario">
+  <label>Nombres: <input type="text" id="nombres" required></label><br>
+  <label>Apellidos: <input type="text" id="apellidos" required></label><br>
+  <label>Año de nacimiento: <input type="number" id="anio" required></label><br>
+  <label>Mes de nacimiento (1-12): <input type="number" id="mes" required min="1" max="12"></label><br>
+  <button type="button" onclick="procesarFormulario()">Guardar</button>
+</form>
+
+<script>
+function esBisiesto(anio) {
+  return (anio % 4 === 0 && anio % 100 !== 0) || (anio % 400 === 0);
+}
+
+function esMesPar(mes) {
+  return mes % 2 === 0;
+}
+
+function procesarFormulario() {
+  const nombres = document.getElementById("nombres").value;
+  const apellidos = document.getElementById("apellidos").value;
+  const anio = parseInt(document.getElementById("anio").value);
+  const mes = parseInt(document.getElementById("mes").value);
+  const bisiesto = esBisiesto(anio);
+  const mesPar = esMesPar(mes);
+
+  console.log(`Bisiesto: ${bisiesto}, Mes par: ${mesPar}`);
+  guardarIndexedDB({ nombres, apellidos, anio, mes, bisiesto, mesPar });
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/dixie@1.0.2/dist/dixie.min.js"></script>
+<script>
+const db = Dixie('MiBD', {
+  datos: '++id,nombres,apellidos,anio,mes,bisiesto,mesPar'
+});
+
+function guardarIndexedDB(data) {
+  db.datos.add(data).then(() => {
+    alert('Datos guardados en IndexedDB');
+  });
+}
+</script>
+
+
+
+</html>
+
+
+
+
+
